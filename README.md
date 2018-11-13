@@ -11,4 +11,11 @@ We believe this code can be usefull for scientists who want to have a real time 
 This code is provided as is, under a GPL license. This experiment has ended for us and we do not activly maintain this code.
 
 ## Citation
-If this code is used in a publication, or build upon, please cite this code as [to be included after first release on git]. The paper that we wrote about this work will be submitted to an academic journal shortly.
+[![DOI](https://zenodo.org/badge/157384716.svg)](https://zenodo.org/badge/latestdoi/157384716)
+
+If this code is used in a publication, or build upon, please cite this code as:
+
+>Rolf Hut. (2018, November 13). RolfHut/Low-power-GPS-Trackers-with-GSM-modems.-firmware-and-online-backend v1.0 (Version v1.0). Zenodo. http://doi.org/10.5281/zenodo.1485899 
+
+The paper that we wrote about this work will be submitted to an academic journal shortly.
+
