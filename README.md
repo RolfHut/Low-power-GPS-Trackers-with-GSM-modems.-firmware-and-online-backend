@@ -7,8 +7,8 @@ For the online backend we used a combination of php, javascript and a MySQL data
 
 We believe this code can be usefull for scientists who want to have a real time view on their data. Furthermore, the firmware for the electron is optimized for low power use, which is also beneficial for other experiments than our own.
 
-## usage and maintenance
-This code is provided as is, under a GNU license. This experiment has ended for us and we do not activly maintain this code.
+## Usage and maintenance
+This code is provided as is, under a GPL license. This experiment has ended for us and we do not activly maintain this code.
 
-##citation
-If this code is used in a publication, or build upon, please cite this code as [to be included after first release on git].
+## Citation
+If this code is used in a publication, or build upon, please cite this code as [to be included after first release on git]. The paper that we wrote about this work will be submitted to an academic journal shortly.
