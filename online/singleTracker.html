@@ -1,0 +1,95 @@
+<html>
+
+<!-- this file generates a map of the data in the database, of a -->
+<!-- single tracker. You can select the tracker from a dropdown -->
+<!-- menu. Most of the heavy lifting is done by leaflet. The data is -->
+<!-- querried from the database by calling the -->
+<!-- http://rolfhut.nl/DataFromParticleCloud/getGeoJSONFromMYSQLindividual.php file.-->
+<!-- it is important that in the JavaScript below the redrawmap() -->
+<!-- function is only called if the pulldown (ddlViewBy) menu is changed. -->
+
+<head>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<select id="ddlViewBy">
+  <option value="1"selected="selected">nothing</option>
+  <option value="2">Irrawaddy01</option>
+  <option value="3">Irrawaddy02</option>
+  <option value="4">Irrawaddy03</option>
+  <option value="5">Irrawaddy04</option>
+  <option value="6">Irrawaddy05</option>
+  <option value="7">Irrawaddy06</option>
+  <option value="8">Irrawaddy07</option>
+  <option value="9">Irrawaddy08</option>
+  <option value="10">Irrawaddy09</option>
+  <option value="11">Irrawaddy10</option>
+  <option value="12">Irrawaddy11</option>
+  <option value="13">Irrawaddy12</option>
+  <option value="14">Irrawaddy13</option>
+  <option value="15">Irrawaddy14</option>
+</select>
+<div id="map" style="width: 100%; height: 100%;"></div>
+<script type="text/javascript">
+
+$(document).ready(function()
+{
+
+var map = L.map('map');
+
+$("#ddlViewBy").change(function()
+{
+redrawMap();
+});
+
+var terrainTiles = L.tileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+	maxZoom: 20,
+	attribution: '&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+});
+terrainTiles.addTo(map);
+map.setView([21.8351179, 95.243486], 10);
+
+
+function redrawMap(){
+
+
+
+
+var e = document.getElementById("ddlViewBy");
+var strUser =
+"http://rolfhut.nl/DataFromParticleCloud/getGeoJSONFromMYSQLindividual.php?trackerName="
++ e.options[e.selectedIndex].text;
+
+
+
+function addDataToMap(data, map) {
+
+map.eachLayer(function(layer) {
+if (layer instanceof L.Marker){
+map.removeLayer(layer);
+}
+});
+
+    var dataLayer = L.geoJson(data, {
+        onEachFeature: function(feature, layer) {
+            var popupText = "Tracker Nr: " + feature.properties.name
+                + "<br>timestamp (ddmmyyHHMMSS, UTC):<br>" +
+    feature.properties.timeStamp + "<br> loc:" + layer.getLatLng() ; layer.bindPopup(popupText);  }
+        });
+dataLayer.addTo(map);
+map.setView([data.features[0].geometry.coordinates[1],data.features[0].geometry.coordinates[0]],10);
+}
+
+$.getJSON(strUser, function(data) {
+    addDataToMap(data, map);
+});
+}
+});
+
+
+</script>
+</body>
+</html>
+
